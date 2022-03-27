@@ -1,12 +1,12 @@
 import { useState } from "react";
 import "./styles.css";
-import TaskForm from "./composonts/TaskForm";
-import TasksHeader from "./composonts/TasksHeader";
-import TasksList from "./composonts/TasksList";
+import TaskForm from "./components/TaskForm";
+import TasksHeader from "./components/TasksHeader";
+import TasksList from "./components/TasksList";
 
 export default function App() {
 
-  const dateTody = ( )=>{
+  const dateTody = () => {
     const timeElapsed = Date.now();
     const today = new Date(timeElapsed);
     return today.toISOString();
@@ -14,7 +14,7 @@ export default function App() {
 
   const [tasks, setTasks] = useState([
     { id: 1, text: "Faire les courses", done: false, date: dateTody() },
-    { id: 2, text: "Ménage !", done: true, date: dateTody() },
+    { id: 2, text: "Ménage !", done: false, date: dateTody() },
   ]);
 
 
