@@ -1,20 +1,29 @@
 import { useState } from "react";
 import "./styles.css";
-import TaskForm from "./TaskForm";
-import TasksHeader from "./TasksHeader";
-import TasksList from "./TasksList";
+import TaskForm from "./composonts/TaskForm";
+import TasksHeader from "./composonts/TasksHeader";
+import TasksList from "./composonts/TasksList";
 
 export default function App() {
+
+  const dateTody = ( )=>{
+    const timeElapsed = Date.now();
+    const today = new Date(timeElapsed);
+    return today.toISOString();
+  }
+
   const [tasks, setTasks] = useState([
-    { id: 1, text: "Faire les courses", done: false },
-    { id: 2, text: "Ménage !", done: true },
+    { id: 1, text: "Faire les courses", done: false, date: dateTody() },
+    { id: 2, text: "Ménage !", done: true, date: dateTody() },
   ]);
+
 
   const addTask = (text) => {
     const newTask = {
       text,
       id: Date.now(),
       done: false,
+      date: dateTody()
     };
 
     setTasks([...tasks, newTask]);
@@ -32,6 +41,9 @@ export default function App() {
     const tasksListCopy = [...tasks];
 
     taskCopy.done = !taskCopy.done;
+    if (taskCopy.done) {
+      taskCopy.date = dateTody()
+    }
     tasksListCopy[index] = taskCopy;
     setTasks(tasksListCopy);
   };
