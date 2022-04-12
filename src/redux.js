@@ -1,15 +1,15 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 import { act } from "react-dom/test-utils";
 
-const todoSlice = createSlice({
+export const todoSlice = createSlice({
     name:  "todo",
     initialState: [
-        { id: 1, text: "Faire les courses", done: false, date: dateTody() },
-        { id: 2, text: "Ménage !", done: false, date: dateTody() },
+        { id: 1, text: "Faire les courses", done: false},
+        { id: 2, text: "Ménage !", done: false},
       ],
       reducers: {
           addTask: (state, action) => {
-            // action {type: "todo/addTaskpayload: "this is my first task!" }
+            // action {type: "todo/addTask", payload: "this is my first task!" }
               const new_task = {
                 id: Date.now(),
                 text:  action.payload,
@@ -26,17 +26,19 @@ const todoSlice = createSlice({
 
           deleteTask: (state, action) => {
          // action {type: "todo/deleteTask", payload: 17{id} }
-                state = this.state.filter( t  => t.id != action.payload );
+                state = state.filter( t  => t.id !== action.payload );
+                return state
           }
       }
     });
 
 
-
-
+    export  const {addTask, deleteTask, toggleTask } = todoSlice.actions;
     export const store = configureStore({
         reducer:{
-              todo: todoSlice,
+              todo: todoSlice.reducer
         }
     })
+
+  
     
